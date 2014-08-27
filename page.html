@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="jquery-ui.min.css" />
+    <style type="text/css">
+        .mainWin {
+            min-width: 300px;
+            max-width: 1000px;
+            width: 90%;
+            display: block;
+            min-height: 1px;
+            background-color: gray;
+            overflow: hidden;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .itemContainer {
+            min-height: 1px;
+            width: 99%;
+            text-align: center;
+            padding:2px;
+        }
+
+   .progress-label {
+    position: relative;
+    left: 50%;
+    height:1px;
+    top: 4px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+  }
+        .ui-widget-header {
+        border:none;
+        }
+    </style>
+</head>
+<body>
+    <div class="mainWin">
+        <div class="itemContainer"><div id="progress1"><div class="progress-label">0%</div></div></div>
+        <div class="itemContainer"><div id="progress2"><div class="progress-label">0%</div></div></div>
+        <div class="itemContainer"><div id="progress3"><div class="progress-label">0%</div></div></div>
+        <div class="itemContainer">
+            <select id="lstProgress">
+                <option value="progress1">Progress #1</option>
+                <option value="progress2">Progress #2</option>
+                <option value="progress3">Progress #3</option>
+            </select>
+        </div>
+        <div class="itemContainer">
+            <input id="btnNeg10" type="button" value="-10" />
+            <input id="btnNeg25" type="button" value="-25" />
+            <input id="btnPos25" type="button" value="+25" />
+            <input id="btnPos10" type="button" value="+10" />
+        </div>
+    </div>
+
+    <script src="jquery-1.11.1.min.js"></script>
+    <script src="jquery-ui.min.js"></script>
+    <script src="ProgressHelper.js"></script>
+ 
+       <script type="text/javascript">
+        $(document).ready(function () {
+            $(".itemContainer>div").progressbar({
+                value: 0
+            });
+            $("input[type=button]").click(btnClicked);
+        });
+
+        var btnClicked = function () {
+
+            var selectedProgressId = $("#lstProgress").val();
+
+            var btnIntVal = parseInt($(this).val());
+
+            var progressHelper = new helper.ProgressController();
+
+            progressHelper.updateProgress(selectedProgressId, btnIntVal);
+        }
+    </script>
+</body>
+</html>
